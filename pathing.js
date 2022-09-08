@@ -1,4 +1,4 @@
-[
+const waypoints = [
     {
         "x":-83,
         "y":51
