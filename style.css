@@ -1,0 +1,31 @@
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url(/images/bg.jpg);
+    background-size: cover;
+    backdrop-filter: blur(5px);
+}
+
+.pageContainer{
+    border: rgb(255, 255, 255) 1px;
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameContainer{
+    border:solid black;
+    height: 780px;
+    width: 1020px;
+}
+
+canvas{
+    width: 1020px;
+    height: 780px;
+}
