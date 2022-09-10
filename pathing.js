@@ -55,3 +55,14 @@ const waypoints = [
         "x":1090,
         "y":627
     }]
+
+    const enemies = []
+
+function spawnWave(num) {
+    for (let i = 1; i <= num; i++) {
+        const gap = i * 60
+        enemies.push(new Enemy({ position: {x: waypoints[0].x - gap, y: waypoints[0].y} }))
+    }
+}
+
+spawnWave(50)
