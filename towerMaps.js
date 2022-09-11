@@ -1,3 +1,5 @@
+// Map data ------------ //
+
 const towerMap = [5, 5, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0,
     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0,
@@ -63,8 +65,11 @@ const towerMap = [5, 5, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+// Map data end ---------- //
 
-//Loop through arrays to find placeable tiles//
+
+
+// Loop through arrays to find placeable tiles, create array for each row //
 
 const towerPlaceData = []
 
@@ -73,12 +78,16 @@ for (let i = 0; i < towerMap.length; i += 85) {
 }
 
 
+
+// -------------- Valid tower tile class and functions
+
 class TowerTile {
     constructor({position = {x: 0, y: 0}}) {
         this.position = position
         this.width = 12
         this.height = 12
-        this.color = 'rgba(23, 209, 132, 0.4)'
+        this.color = 'rgba(23, 209, 132, 0.2)'
+        this.placed = false
     }
     draw() {
         cvs.fillStyle = this.color
@@ -90,27 +99,43 @@ class TowerTile {
 
         if (mouse.x > this.position.x && mouse.x < this.position.x + this.width && mouse.y > this.position.y && mouse.y < this.position.y + this.height){
             console.log('collision')
-            this.color = 'rgba(23, 209, 132, 1)'
-        } else { this.color = 'rgba(23, 209, 132, 0.4)'
+            this.color = 'orange'
+        } else { this.color = 'rgba(23, 209, 132, 0.2)'
 
         }
     }
 }
 
-const towers = []
+// TESTING --------~~~~~~~~------- This commented version below draws a tower sized square rather than just filling the tile, but is not as accurate to grid ---~~~~~---  //
 
-let activeTile = undefined
+// class TowerTile {
+//     constructor({position = {x: 0, y: 0}}) {
+//         this.position = position
+//         this.width = 12
+//         this.height = 12
+//         this.color = 'rgba(23, 209, 132, 0.2)'
+//         this.placed = false
+//     }
+//     draw() {
+//         cvs.fillStyle = this.color
+//         cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
+//     }
 
-class Tower {
-    constructor({ position = { x: 0, y: 0 } }){
-        this.position = position
-    }
+//     update(mouse) {
+//         this.draw()
 
-    draw() {
-        cvs.fillStyle = 'red'
-        cvs.fillRect(this.position.x, this.position.y, 12, 12)
-    }
-}
+//         if (mouse.x > this.position.x && mouse.x < this.position.x + this.width && mouse.y > this.position.y && mouse.y < this.position.y + this.height){
+//             console.log('collision')
+//             cvs.fillStyle = 'rgba(23, 209, 132, 1)'
+//             cvs.fillRect(mouse.x, mouse.y, 24, 24)
+
+//         } 
+//     }
+// }
+
+
+
+// ------------------------------ //
 
 const buildTiles = []
 
@@ -123,15 +148,96 @@ towerPlaceData.forEach((arr, y) =>{
                 y: y * 12}}))
 }})})
 
+// ------------------------------ //
+
+const towers = []
+
+
+class Tower {
+    constructor({ position = { x: 0, y: 0 } }){
+        this.position = position
+        this.width = 12 * 2
+        this.height = 12 * 2
+        this.center = {
+            x: this.position.x + this.width / 2,
+            y: this.position.y + this.height / 2
+        }
+        this.projectiles = [
+            new Projectile({
+                position: {
+                    x: this.center.x,
+                    y: this.center.y
+                },
+                enemy: enemies[0]
+            })
+        ]
+    }
+    
+    draw() {
+        cvs.fillStyle = 'red'
+        cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
+        
+    }
+}
+
+
+class Projectile {
+    constructor({position = {x: 0, y: 0}, enemy}) {
+        this.position = position
+        this.velocity = { x: 0, y: 0 }
+        this.enemy = enemy
+        this.radius = 6
+    }
+
+    draw() {
+        cvs.beginPath()
+        cvs.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
+        cvs.fillStyle = "blue"
+        cvs.fill()
+    }
+
+    update() {
+        this.draw()
+
+        const angle = Math.atan2(enemies[0].center.y - this.position.y, enemies[0].center.x - this.position.x)
+
+        this.velocity.x = Math.cos(angle)
+        this.velocity.y = Math.sin(angle)
+
+        this.position.x += this.velocity.x
+        this.position.y += this.velocity.y
+    }
+}
+
+// --------------- Event Listeners and actions V --------------- //
+
 const mouse = { x: 0, y: 0}
+
+let activeTile = undefined
+canvas.addEventListener('click', e=>{
+    if (activeTile != null && !activeTile.isPlaced) {
+        towers.push(new Tower({
+            position: {x: activeTile.position.x, y: activeTile.position.y}
+        }))
+        activeTile.isPlaced = true
+    }
+})
 
 canvas.addEventListener('mousemove', e=>{
     let buffer = canvas.getBoundingClientRect()
     mouse.x = e.clientX - buffer.left
     mouse.y = e.clientY - buffer.top
-    console.log(e)
-
-
+    
+    activeTile = null
+    for (i = 0; i < buildTiles.length; i++){
+        const tile = buildTiles[i]
+        if (
+            mouse.x > tile.position.x && mouse.x < tile.position.x + tile.width && mouse.y > tile.position.y && mouse.y < tile.position.y + tile.height
+        ){
+            activeTile = tile
+            break
+        }
+    }
 })
 
 

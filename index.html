@@ -11,8 +11,27 @@
     </head>
     <body>
         <div class="pageContainer">
+            <div class="header">
+                <div class="input">
+                    <form>
+                        <label><Enter for="gameName">Enter Name:</label>
+                            <input type="text" id="gameName" name="gameName" placeholder="Name"></input>
+                            <input type="button" id="nameButton" value="Submit" onclick="getNameInput()">
+                    </form>
+                </div>
+                <div class="banner">
+                    <div class="bannerContent">
+                        
+                    </div>
+                </div>
+            </div>
             <div class="gameContainer">
-        <canvas></canvas>
+                <img src="/images/grid.png" alt="" id="grid">
+                <canvas></canvas>
+                <div class="btnContainer">
+                    <button class="btmButtons" id="gridButton">Show Grid</button>
+                    
+                </div>
             </div>
         </div>
 

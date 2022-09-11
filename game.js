@@ -14,54 +14,7 @@ image.src = '/images/map2.png'
 
 
 
-
-//----Start-----// Enemy class dimensions, center, and spawn / update functions, && Array 
-
-class Enemy {
-    constructor({ position = { x: 0, y: 0}}){
-        this.position = position
-        this.width = 30
-        this.height = 30
-        this.waypointIndex = 0
-        this.center = {
-            x: this.position.x + this.width / 2,
-            y: this.position.y + this.height / 2
-        }
-    }
-    
-    spawn() {
-        cvs.fillStyle = 'goldenrod'
-        cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
-    }
-
-    update() {
-        this.spawn()
-
-        const waypoint = waypoints[this.waypointIndex]
-        const yDistance = waypoint.y - this.center.y
-        const xDistance = waypoint.x - this.center.x
-        const angle = Math.atan2(yDistance, xDistance)
-        this.position.x += Math.cos(angle)
-        this.position.y += Math.sin(angle)
-        this.center = {
-            x: this.position.x + this.width / 2,
-            y: this.position.y + this.height / 2
-        }
-        
-        if (Math.round(this.center.x) === Math.round(waypoint.x) && Math.round(this.center.y) === Math.round(waypoint.y) && this.waypointIndex < waypoints.length -1 ){
-            this.waypointIndex++
-        }
-    }
-}
-
-
-
-
-//-----END-----// Enemy class dimensions, center, and spawn / update functions, && Array
-
-
-
-// Animate -> request frame loop //
+// Animate -> request frame loop // ********
 
 function animate() {
     requestAnimationFrame(animate)
@@ -74,8 +27,57 @@ function animate() {
     buildTiles.forEach(tile =>{
         tile.update(mouse)
     })
+
+    towers.forEach(tower =>{
+        tower.draw()
+        tower.projectiles.forEach((projectile, i) => {
+            projectile.update()
+
+            const xDistance = projectile.enemy.center.x - projectile.position.x
+            const yDistance = projectile.enemy.center.y - projectile.position.y
+            const distance = Math.hypot(xDistance, yDistance)
+            if (distance < projectile.enemy.radius + projectile.radius){
+                tower.projectiles.splice (i, 1)
+            }
+        })
+    })
     
 }
 
-//------------------------------// 
+
+// V----------------HTML interactions--------------V //
+
+
+let gridButton = document.getElementById('gridButton')
+let grid = document.getElementById('grid')
+let clicks = 0
+gridButton.addEventListener('click', e=>{
+
+    if (clicks % 2 === 0){
+        grid.style.display = 'flex'
+        gridButton.innerHTML = 'Hide Grid'
+        clicks++
+    }else{
+        grid.style.display = 'none'
+        gridButton.innerHTML = 'Show Grid'
+        clicks++
+    }
+})
+
+// ------- // 
+
+getNameInput = ()=>{
+    let username = document.getElementById('gameName').value
+    let bannerContent = document.querySelector('.bannerContent')
+    let banner = document.querySelector('.banner')
+    let inputField = document.querySelector('.input')
+
+    
+    inputField.style.display = 'none'
+    banner.style.display = 'flex'
+    bannerContent.append(username)
+    
+
+}
+
 

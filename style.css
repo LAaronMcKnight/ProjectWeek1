@@ -17,6 +17,7 @@ body{
     display:flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .gameContainer{
@@ -28,4 +29,90 @@ body{
 canvas{
     width: 1020px;
     height: 780px;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    width: 99.5vw;
+    height: 52px;
+    position: absolute;
+    z-index: +2;
+    top: 2px;
+    
+}
+
+.input{
+    display: contents;
+    /* display: none; */
+}
+
+.banner{
+    border:solid black 2px;
+    background-image: url(/images/bannertest.png);
+    background-size: cover;
+    width: 1020px;
+    height: 60px;
+    display: none;
+}
+
+.bannerContent{
+    justify-content: center;
+    align-items: flex-start;
+    width: fit-content;
+    height: fit-content;
+    justify-content: space-around;
+    font-size: 50px;
+    color:rgb(172, 127, 176);
+    font-weight: bolder;
+    padding-left: 5px;
+}
+
+#grid {
+    position: absolute;
+    z-index: +2;
+    opacity: 0.2;
+    display: none;
+    pointer-events: none;
+}
+
+#gridButton{
+    font-weight: bold;
+    margin: 8px;
+    width: 100px;
+    height: 24px;
+    border-radius: 6px;
+    background-color: rgb(18, 210, 31);
+    border:solid black 1px;
+    opacity: .6;
+}
+
+#gridButton:hover{
+    opacity: 1;
+    background-color: rgb(18, 210, 31);
+}
+
+#gridButton:active{
+    scale: .94;
+    
+}
+
+#nameText{
+
+}
+
+#nameButton{
+    width: 50px;
+    border:solid lime 1px;
+    color: darkblue;
+    background-color: gainsboro;
+    transition: .5s;
+}
+
+#nameButton:hover{
+    border:solid skyblue 2px;
+}
+
+#nameButton:active{
+    scale: .94;
 }
