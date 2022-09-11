@@ -88,7 +88,8 @@ class TowerTile {
         this.height = 12
         this.color = 'rgba(23, 209, 132, 0.2)'
         this.placed = false
-    }
+    } // end constructor
+
     draw() {
         cvs.fillStyle = this.color
         cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
@@ -104,7 +105,7 @@ class TowerTile {
 
         }
     }
-}
+} // end functions
 
 // TESTING --------~~~~~~~~------- This commented version below draws a tower sized square rather than just filling the tile, but is not as accurate to grid ---~~~~~---  //
 
@@ -158,27 +159,38 @@ class Tower {
         this.position = position
         this.width = 12 * 2
         this.height = 12 * 2
+        this.range = 120
+        this.coolDown = 0
         this.center = {
             x: this.position.x + this.width / 2,
             y: this.position.y + this.height / 2
         }
-        this.projectiles = [
-            new Projectile({
-                position: {
-                    x: this.center.x,
-                    y: this.center.y
-                },
-                enemy: enemies[0]
-            })
-        ]
-    }
+        this.projectiles = []
+        this.target = undefined
+    } // end constructor 
     
     draw() {
         cvs.fillStyle = 'red'
         cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
         
+        cvs.beginPath()
+        cvs.arc( this.center.x, this.center.y, this.range, 0, Math.PI * 2)
+        cvs.fillStyle = 'rgba(252, 229, 8, 0.18)'
+        cvs.fill()
     }
-}
+
+    update() {
+        this.draw()
+        if (this.coolDown % 500 === 0 && this.target === true){
+            this.projectiles.push(new Projectile({position: {
+                    x: this.center.x,
+                    y: this.center.y
+                },
+                enemy: this.target
+            }))
+        }
+    }
+} // end functions
 
 
 class Projectile {
@@ -187,7 +199,7 @@ class Projectile {
         this.velocity = { x: 0, y: 0 }
         this.enemy = enemy
         this.radius = 6
-    }
+    } // end constructor
 
     draw() {
         cvs.beginPath()
@@ -201,15 +213,16 @@ class Projectile {
 
         const angle = Math.atan2(enemies[0].center.y - this.position.y, enemies[0].center.x - this.position.x)
 
-        this.velocity.x = Math.cos(angle)
-        this.velocity.y = Math.sin(angle)
+        const projectileSpeed = 3
+        this.velocity.x = Math.cos(angle) * projectileSpeed
+        this.velocity.y = Math.sin(angle) * projectileSpeed
 
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
     }
-}
+} // end functions
 
-// --------------- Event Listeners and actions V --------------- //
+// --------------- Event Listeners and actions related to map V --------------- //
 
 const mouse = { x: 0, y: 0}
 

@@ -14,7 +14,7 @@ image.src = '/images/map2.png'
 
 
 
-// Animate -> request frame loop // ********
+// Animate -> request frame loop // ************************************   *  *  * *
 
 function animate() {
     requestAnimationFrame(animate)
@@ -29,8 +29,19 @@ function animate() {
     })
 
     towers.forEach(tower =>{
-        tower.draw()
-        tower.projectiles.forEach((projectile, i) => {
+        tower.update()
+        const validEnemies = enemies.filter(enemy =>{
+            const xDistance = enemy.center.x - tower.center.x
+            const yDistance = enemy.center.y - tower.center.y
+            const distance = Math.hypot(xDistance, yDistance)
+            return distance < enemy.radius + tower.range
+        })
+        tower.target = validEnemies[0]
+        
+
+        for (let i = tower.projectiles.length - 1; i >= 0; i--){
+            const projectile = tower.projectiles[i]
+        
             projectile.update()
 
             const xDistance = projectile.enemy.center.x - projectile.position.x
@@ -39,10 +50,12 @@ function animate() {
             if (distance < projectile.enemy.radius + projectile.radius){
                 tower.projectiles.splice (i, 1)
             }
-        })
+        }
     })
     
 }
+
+// ---------------------------- // ************************************    *   *  * *
 
 
 // V----------------HTML interactions--------------V //

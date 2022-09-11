@@ -57,15 +57,40 @@ canvas{
 }
 
 .bannerContent{
+    display:flex;
+    flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    width: fit-content;
-    height: fit-content;
+    /* width: fit-content;
+    height: fit-content; */
     justify-content: space-around;
     font-size: 50px;
     color:rgb(172, 127, 176);
     font-weight: bolder;
-    padding-left: 5px;
+    padding-left: 20px;
+    text-shadow: none;
+
+    animation-name: nameColor;
+    animation-timing-function: linear;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+.gameInfo{
+    border:solid rgb(181, 199, 15) 2px;
+    height: 56px;
+    width: 60%;
+    margin-left: 40px;
+}
+
+.picFrame{
+    border:solid rgb(19, 194, 19) 2px;
+    width: 60px;
+    height: 56px;
+    margin-bottom: 3px;
+    margin-left: 20px;
+    
 }
 
 #grid {
@@ -115,4 +140,23 @@ canvas{
 
 #nameButton:active{
     scale: .94;
+}
+
+@keyframes nameColor{
+
+    0%{
+        color: rgb(172, 127, 176);
+        text-shadow: 1px 1px 2px black;
+    }
+
+    50%{
+        color: rgb(124, 58, 130);
+        text-shadow: 1.5px 1.5px 3px white;
+        
+    }
+    
+    100%{
+        color: rgb(172, 127, 176);
+        text-shadow: 1px 1px 2px black;
+    }
 }
