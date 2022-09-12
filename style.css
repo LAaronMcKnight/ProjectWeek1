@@ -189,16 +189,6 @@ form{
     animation: startOpacity 3s infinite linear running;
 }
 
-.leaderBoard{
-    position: absolute;
-    z-index: +2;
-    top:4vh;
-    left: 85vw;
-    border:dashed black;
-    text-align: center;
-    height: 240px;
-    width: 200px;
-}
 
 .gameOverText{
     font-size: xx-large;
@@ -209,9 +199,21 @@ form{
     left: 46vw;
     animation: gameOverEnter 5s forwards ease-out;
     display: flex;
-
+    
 }
 
+.leaderBoard{
+    position: absolute;
+    z-index: +2;
+    top:4vh;
+    left: 85vw;
+    border:dashed black;
+    text-align: center;
+    height: 240px;
+    width: 200px;
+    opacity: 1;
+    /* display:; */
+}
 .names{
     width: 65%;
     height: 80%;
@@ -219,8 +221,11 @@ form{
 
 }
 
-.score{
-    width: 35%;
+.scores{
+    width: 20%;
+    position: absolute;
+    left: 7.8vw;
+    top: 3vh;
 }
 
 @keyframes startOpacity{

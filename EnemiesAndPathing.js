@@ -75,7 +75,7 @@ class Enemy {
             y: this.position.y + this.height / 2
         }
         this.health = 100
-        this.speed = 1.8
+        this.speed = 3
         this.velocity = {
             x:0, y:0
         }
@@ -150,13 +150,18 @@ function spawnWave(num, gap) {
     }
 }
 
-function endlessMode(){
-let g = 100
-let n = 10
-    while (Player.health > 0){
-        spawnWave(n, g)
-    }
-}
+// function levelWaves() {
+//     let num = 12
+//     let gap = 100
+//     spawnWave(num, gap)
+//     while (Player.health > 0){
+//         if (enemies === 0){
+//             num += 12
+//             gap -= 5
+//             spawnWave(num, gap)
+//         }
+        
+//     }
+// }
 
-
-endlessMode()
+spawnWave(30, 120)

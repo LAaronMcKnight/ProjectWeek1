@@ -235,53 +235,7 @@ class Tower2 {
         }
         this.coolDown++
     }
-} 
-
-const towers3 = []
-
-class Tower3 {
-    constructor({ position = { x: 0, y: 0 } }){
-        this.position = position
-        this.width = 12 * 2
-        this.height = 12 * 2
-        this.range = 70
-        this.coolDown = 0
-        this.center = {
-            x: this.position.x + this.width / 2,
-            y: this.position.y + this.height / 2
-        }
-        this.projectiles2 = []
-        
-    } // end constructor 
-    
-    draw() {
-        cvs.fillStyle = 'goldenrod'
-        cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
-
-        // cvs.fillStyle = 'black'
-        // cvs.fillRect(this.position.x, this.position.y, 10, 10)
-
-        cvs.beginPath() // Begin range indicator code
-        cvs.arc( this.center.x, this.center.y, 180, 0, Math.PI * 2)
-        cvs.fillStyle = 'rgba(147, 228, 101, 0.18)'
-        cvs.fill()
-    }
-
-    update() {
-        this.draw()
-        if (this.coolDown % 80 === 0 && this.target){
-            this.projectiles2.push(new Projectile2({position: {
-                    x: this.center.x,
-                    y: this.center.y
-                },
-                enemy: this.target
-            }))
-        }
-        this.coolDown++
-    }
-} 
-
-
+}
 
 class Projectile {
     constructor({position = {x: 0, y: 0}, enemy}) {
@@ -310,32 +264,32 @@ class Projectile {
     }
 } // end functions
 
-class Projectile2 {
-    constructor({position = {x: 0, y: 0}, enemy}) {
-        this.position = position
-        this.velocity = { x: 0, y: 0 }
-        this.enemy = enemy
-        this.radius = 3
-        this.projectileSpeed = 6
-    } // end constructor
+// class Projectile2 {
+//     constructor({position = {x: 0, y: 0}, enemy}) {
+//         this.position = position
+//         this.velocity = { x: 0, y: 0 }
+//         this.enemy = enemy
+//         this.radius = 3
+//         this.projectileSpeed = 6
+//     } // end constructor
 
-    draw() {
-        cvs.beginPath()
-        cvs.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
-        cvs.fillStyle = "red"
-        cvs.fill()
-    }
+//     draw() {
+//         cvs.beginPath()
+//         cvs.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
+//         cvs.fillStyle = "red"
+//         cvs.fill()
+//     }
 
-    update() {
-        this.draw()
+//     update() {
+//         this.draw()
 
-        const angle = Math.atan2(this.enemy.center.y - this.position.y, this.enemy.center.x - this.position.x)
-        this.velocity.x = Math.cos(angle) * this.projectileSpeed
-        this.velocity.y = Math.sin(angle) * this.projectileSpeed
-        this.position.x += this.velocity.x
-        this.position.y += this.velocity.y
-    }
-} // end f
+//         const angle = Math.atan2(this.enemy.center.y - this.position.y, this.enemy.center.x - this.position.x)
+//         this.velocity.x = Math.cos(angle) * this.projectileSpeed
+//         this.velocity.y = Math.sin(angle) * this.projectileSpeed
+//         this.position.x += this.velocity.x
+//         this.position.y += this.velocity.y
+//     }
+// } // end f
 
 // --------------- Event Listeners and actions related to map V --------------- //
 
@@ -383,15 +337,15 @@ window.addEventListener('keydown', event=>{
     }
 })
 
-window.addEventListener('keydown', event=>{
-    if (event.key == '2' && activeTile != null && !activeTile.isPlaced && Player.money - 100 >= 0) {
-        Player.money -= 100
-        document.getElementById('moneyNum').innerHTML = Player.money
-        towers2.push(new Tower3({
-            position: {x: activeTile.position.x, y: activeTile.position.y}
-        }))
-        activeTile.isPlaced = true
-    }
-})
+// window.addEventListener('keydown', event=>{
+//     if (event.key == '2' && activeTile != null && !activeTile.isPlaced && Player.money - 100 >= 0) {
+//         Player.money -= 100
+//         document.getElementById('moneyNum').innerHTML = Player.money
+//         towers2.push(new Tower3({
+//             position: {x: activeTile.position.x, y: activeTile.position.y}
+//         }))
+//         activeTile.isPlaced = true
+//     }
+// })
 
 

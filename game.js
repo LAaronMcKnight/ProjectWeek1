@@ -15,7 +15,7 @@ window.onload = ()=>{
 // image.onload = ()=>{
 //     animate();
 // }
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
 
@@ -36,12 +36,22 @@ function animate() {
             enemies.splice(i, 1)
             document.getElementById('healthNum').innerHTML = Player.health
 
+            
+
             if (Player.health === 0){
                 cancelAnimationFrame(animationId)
                 gameOver()
                 storeScore()
             }
         }
+    }
+
+    function gameOver(){
+        let el = document.createElement('div')
+        el.classList.add('gameOverText')
+        el.innerText = "GAME OVER"
+        document.body.appendChild(el)
+        document.getElementById('s1').append(Player.health)
     }
     
     
@@ -80,9 +90,9 @@ function animate() {
                         Player.money += 10
                         document.getElementById('scoreNum').innerHTML = Player.score
                         document.getElementById('moneyNum').innerHTML = Player.money
+                        document.getElementById('s1').innerHTML = Player.score
                     } // if > -1 to in case enemy is destroyed by another tower before projectile hit
                 }
-
                 tower.projectiles.splice (i, 1)
             }
         }
@@ -126,48 +136,44 @@ function animate() {
             }
         }
     })
+}
+// ---------------------------- // ************************************    *   *  * *
+console.log('test')
+function getNameInput(){
+    let username = document.getElementById('gameName').value
+    let bannerContent = document.querySelector('.bannerContent')
+    let inputField = document.querySelector('.input')
+    let gameInfo = document.querySelector('.gameInfo')
 
-    // towers3.forEach(tower3 =>{
-    //     tower3.update()
-    //     this.target = undefined
-    //     const validEnemies = enemies.filter(enemy =>{
-    //         const xDistance = enemy.center.x - tower3.center.x
-    //         const yDistance = enemy.center.y - tower3.center.y
-    //         const distance = Math.hypot(xDistance, yDistance)
-    //         return distance < enemy.radius + tower3.range
-    //     })
-    //     tower3.target = validEnemies[0]
-        
-    //     for (let i = tower3.projectiles.length - 1; i >= 0; i--){
-    //         const projectile2 = tower3.projectiles2[i]
-        
-    //         projectile2.update()
+    bannerContent.append(username)
+    document.querySelector('#p1').append(username)
+
+    gameInfo.style.display = "flex"
+    inputField.style.display = 'none'
+    bannerContent.style.display = 'flex'
+
+
+stopAnim = ()=>{
+    let start = document.getElementById('startButton')
     
-    //         const xDistance = projectile2.enemy.center.x - projectile2.position.x
-    //         const yDistance = projectile2.enemy.center.y - projectile2.position.y
-    //         const distance = Math.hypot(xDistance, yDistance)
-    //         if (distance < projectile2.enemy.radius + projectile2.radius){
-    //             projectile2.enemy.health -= 40
-    //             if ( projectile2.enemy.health <= 0){
-    //                 const enemyIndex = enemies.findIndex(enemy =>{
-    //                     return projectile2.enemy === enemy
-    //                 })
-    //                 if (enemyIndex > -1) { 
-    //                     enemies.splice(enemyIndex, 1)
-    //                     Player.score += 10
-    //                     Player.money += 10
-    //                     document.getElementById('scoreNum').innerHTML = Player.score
-    //                     document.getElementById('moneyNum').innerHTML = Player.money
-    //                 } // if > -1 to in case enemy is destroyed by another tower before projectile hit
-    //             }
-    
-    //             tower2.projectiles.splice (i, 1)
-    //         }
-    //     }
-    // })
+    start.style.animation = "none"
 }
 
-// ---------------------------- // ************************************    *   *  * *
+
+
+startGame = () =>{
+    animate()
+}
+
+
+
+// function storeScore() {
+//     let sb = document.querySelector('.leaderBoard')
+//     let ps = document.getElementById('scoreNum').value
+//     let pn = document.querySelector('.bannerContent').value
+//     sb.appendChild(pn)
+//     sb.appendChild(ps)
+}
 
 
 
@@ -192,47 +198,3 @@ gridButton.addEventListener('click', e=>{
 
 // ------- // 
 
-function getNameInput(){
-    let username = document.getElementById('gameName').value
-    let bannerContent = document.querySelector('.bannerContent')
-    let inputField = document.querySelector('.input')
-    let gameInfo = document.querySelector('.gameInfo')
-
-    bannerContent.append(username)
-    document.querySelector('#p1').append(username)
-
-    gameInfo.style.display = "flex"
-    inputField.style.display = 'none'
-    // banner.style.display = 'flex'
-    bannerContent.style.display = 'flex'
-    // infoFields.style.display = 'flex'
-    // picFrame.style.display = 'contents'
-}
-
-function stopAnim(){
-    let start = document.getElementById('startButton')
-    
-    start.style.animation = "none"
-}
-
-
-
-function startGame() {
-    animate()
-}
-
-function gameOver(){
-    let el = document.createElement('div')
-    el.classList.add('gameOverText')
-    el.innerText = "GAME OVER"
-    document.body.appendChild(el)
-    document.getElementById('s1').innerHTML = Player.score.valueOf
-}
-
-function storeScore() {
-    let sb = document.querySelector('.leaderBoard')
-    let ps = document.getElementById('scoreNum').value
-    let pn = document.querySelector('.bannerContent').value
-    sb.appendChild(pn)
-    sb.appendChild(ps)
-}
