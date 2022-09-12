@@ -75,19 +75,41 @@ class Enemy {
             y: this.position.y + this.height / 2
         }
         this.health = 100
-        this.speed = 1.5
+        this.speed = 1.8
         this.velocity = {
             x:0, y:0
         }
+        this.image = new Image()
+        this.image.src = '/images/psyduckMap.png'
+        this.frames = 2
+        this.currentFrame = 0
+
     } // end constructor
     
     spawn() {
-        cvs.fillStyle = 'goldenrod'
-        // cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
+        const cropWidth = this.image.width / this.frames
+        const crop = {
+            position: {x:cropWidth * this.currentFrame, y:0},
+            width: cropWidth,
+            height: 64
+        }
+        cvs.drawImage(
+            this.image, crop.position.x, 24, crop.width, crop.height,
+            this.position.x -16, this.position.y, crop.width, crop.height
+        )
+        if (this.currentFrame.elapsed % 500 === 0){
+            this.currentFrame++
 
-        cvs.beginPath()
-        cvs.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2)
-        cvs.fill()
+            if(this.currentFrame >= 2){
+            this.currentFrame = 0
+            }
+        }    
+        // cvs.fillStyle = 'goldenrod'
+        // // cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+        // cvs.beginPath()
+        // cvs.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2)
+        // cvs.fill()
 
         cvs.fillStyle = 'red'
         cvs.fillRect(this.position.x, this.position.y - 8, this.width, 5)
@@ -128,22 +150,13 @@ function spawnWave(num, gap) {
     }
 }
 
-// function endlessMode() {
-//     let num = 10
-//     let gap = 100
-
-//     // while (player.health < 0){
-//         spawnWave(num, gap)
-        
-//         if (enemies.length === 0){
-//             num += 10
-//             gap -= 5
-//             spawnWave(num, gap)
-//         }
-//     }
+function endlessMode(){
+let g = 100
+let n = 10
+    while (Player.health > 0){
+        spawnWave(n, g)
+    }
+}
 
 
-// endlessMode()
-
-
-spawnWave(30, 100)
+endlessMode()
