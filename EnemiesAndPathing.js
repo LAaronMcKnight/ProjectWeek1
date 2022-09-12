@@ -75,7 +75,7 @@ class Enemy {
             y: this.position.y + this.height / 2
         }
         this.health = 100
-        this.speed = 2.1
+        this.speed = 2.05
         this.velocity = {
             x:0, y:0
         }

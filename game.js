@@ -169,6 +169,11 @@ startGame = () =>{
     animate()
 }
 
+playSound = ()=>{
+    document.getElementById('battle').play()
+    audio.volume = .3
+}
+
 
 
 // function storeScore() {

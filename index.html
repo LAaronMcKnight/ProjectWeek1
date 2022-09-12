@@ -8,6 +8,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
+        <audio src="/sounds/battle.mp3" autoplay volume=".1" id="battle"></audio>
     </head>
     <body>
         <div class="pageContainer">
@@ -44,7 +45,7 @@
                 <img src="/images/grid.png" alt="" id="grid">
                 <canvas></canvas>
                 <div class="btnContainer">
-                    <button class="btmButtons" id="startButton" onclick="startGame(), stopAnim()">Start</button>
+                    <button class="btmButtons" id="startButton" onclick="startGame(), stopAnim(), plsySound()">Start</button>
                     <button class="btmButtons" id="gridButton">Show Grid</button>
                     <button class="btmButtons" id="restart" onclick="restart()">Restart</button>
                     <button class="btmButtons">Leaderboard</button>
