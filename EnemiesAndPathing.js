@@ -75,7 +75,7 @@ class Enemy {
             y: this.position.y + this.height / 2
         }
         this.health = 100
-        this.speed = 3
+        this.speed = 2.1
         this.velocity = {
             x:0, y:0
         }
@@ -164,4 +164,4 @@ function spawnWave(num, gap) {
 //     }
 // }
 
-spawnWave(30, 120)
+spawnWave(85, 100)

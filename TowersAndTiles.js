@@ -181,7 +181,7 @@ class Tower {
 
     update() {
         this.draw()
-        if (this.coolDown % 40 === 0 && this.target){
+        if (this.coolDown % 32 === 0 && this.target){
             this.projectiles.push(new Projectile({position: {
                     x: this.center.x,
                     y: this.center.y
@@ -200,7 +200,7 @@ class Tower2 {
         this.position = position
         this.width = 12 * 2
         this.height = 12 * 2
-        this.range = 160
+        this.range = 165
         this.coolDown = 0
         this.center = {
             x: this.position.x + this.width / 2,
@@ -243,14 +243,19 @@ class Projectile {
         this.velocity = { x: 0, y: 0 }
         this.enemy = enemy
         this.radius = 6
-        this.projectileSpeed = 4
+        this.projectileSpeed = 5
+        this.image = new Image()
+        this.image.src = 'images/pokeball18.png'
     } // end constructor
 
     draw() {
-        cvs.beginPath()
-        cvs.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
-        cvs.fillStyle = "blue"
-        cvs.fill()
+        cvs.drawImage(this.image, this.position.x, this.position.y)
+
+
+        // cvs.beginPath()
+        // cvs.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
+        // cvs.fillStyle = "blue"
+        // cvs.fill()
     }
 
     update() {

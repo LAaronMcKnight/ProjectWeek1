@@ -126,7 +126,7 @@ function animate() {
                     if (enemyIndex > -1) { 
                         enemies.splice(enemyIndex, 1)
                         Player.score += 10
-                        Player.money += 10
+                        Player.money += 15
                         document.getElementById('scoreNum').innerHTML = Player.score
                         document.getElementById('moneyNum').innerHTML = Player.money
                     } // if > -1 to in case enemy is destroyed by another tower before projectile hit
@@ -157,6 +157,10 @@ stopAnim = ()=>{
     let start = document.getElementById('startButton')
     
     start.style.animation = "none"
+}
+
+restart = () =>{
+    window.location.reload()
 }
 
 
