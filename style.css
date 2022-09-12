@@ -43,8 +43,14 @@ canvas{
 }
 
 .input{
-    display: contents;
+    display: flex;
     /* display: none; */
+}
+form{
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    /* width: 800px; */
 }
 
 .banner{
@@ -78,19 +84,32 @@ canvas{
 }
 
 .gameInfo{
+    display: flex;
+    flex-direction: row;
     border:solid rgb(181, 199, 15) 2px;
     height: 56px;
     width: 60%;
     margin-left: 40px;
 }
 
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border:dashed white 1px;
+    width: 33%;
+    color: white
+}
+
 .picFrame{
-    border:solid rgb(19, 194, 19) 2px;
-    width: 60px;
-    height: 56px;
+    
+    width: 50px;
+    height: 55px;
     margin-bottom: 3px;
     margin-left: 20px;
-    
+    background-image: url(/images/squirtle3.gif);
+    background-size: contain;
 }
 
 #grid {
@@ -122,10 +141,6 @@ canvas{
     
 }
 
-#nameText{
-
-}
-
 #nameButton{
     width: 50px;
     border:solid lime 1px;
@@ -140,6 +155,18 @@ canvas{
 
 #nameButton:active{
     scale: .94;
+}
+
+.gameOverText{
+    font-size: xx-large;
+    color: white;
+    position: absolute;
+    z-index: +2;
+    top: -20vh;
+    left: 46vw;
+    animation: gameOverEnter 5s forwards ease-out;
+    display: flex;
+
 }
 
 @keyframes nameColor{
@@ -158,5 +185,25 @@ canvas{
     100%{
         color: rgb(172, 127, 176);
         text-shadow: 1px 1px 2px black;
+    }
+}
+
+@keyframes gameOverEnter{
+    0%{
+        top: -20vh;
+        color: white;
+    } 100%{
+        top: 50vh;
+        color: red;
+        text-shadow: 2px 2px 4px darkred;
+    }
+}
+
+@keyframes gameOverColor{
+    0%{
+        color: red
+    }
+    100%{
+        color: blue;
     }
 }

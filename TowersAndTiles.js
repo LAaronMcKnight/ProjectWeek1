@@ -166,14 +166,14 @@ class Tower {
             y: this.position.y + this.height / 2
         }
         this.projectiles = []
-        this.target = undefined
+        
     } // end constructor 
     
     draw() {
         cvs.fillStyle = 'red'
         cvs.fillRect(this.position.x, this.position.y, this.width, this.height)
         
-        cvs.beginPath()
+        cvs.beginPath() // Begin range indicator code
         cvs.arc( this.center.x, this.center.y, this.range, 0, Math.PI * 2)
         cvs.fillStyle = 'rgba(252, 229, 8, 0.18)'
         cvs.fill()
@@ -181,7 +181,7 @@ class Tower {
 
     update() {
         this.draw()
-        if (this.coolDown % 500 === 0 && this.target === true){
+        if (this.coolDown % 50 === 0 && this.target){
             this.projectiles.push(new Projectile({position: {
                     x: this.center.x,
                     y: this.center.y
@@ -189,6 +189,7 @@ class Tower {
                 enemy: this.target
             }))
         }
+        this.coolDown++
     }
 } // end functions
 
@@ -199,6 +200,7 @@ class Projectile {
         this.velocity = { x: 0, y: 0 }
         this.enemy = enemy
         this.radius = 6
+        this.projectileSpeed = 3
     } // end constructor
 
     draw() {
@@ -211,11 +213,11 @@ class Projectile {
     update() {
         this.draw()
 
-        const angle = Math.atan2(enemies[0].center.y - this.position.y, enemies[0].center.x - this.position.x)
+        const angle = Math.atan2(this.enemy.center.y - this.position.y, this.enemy.center.x - this.position.x)
 
-        const projectileSpeed = 3
-        this.velocity.x = Math.cos(angle) * projectileSpeed
-        this.velocity.y = Math.sin(angle) * projectileSpeed
+        
+        this.velocity.x = Math.cos(angle) * this.projectileSpeed
+        this.velocity.y = Math.sin(angle) * this.projectileSpeed
 
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
@@ -228,7 +230,9 @@ const mouse = { x: 0, y: 0}
 
 let activeTile = undefined
 canvas.addEventListener('click', e=>{
-    if (activeTile != null && !activeTile.isPlaced) {
+    if (activeTile != null && !activeTile.isPlaced && Player.money - 50 >= 0) {
+        Player.money -= 50
+        document.getElementById('moneyNum').innerHTML = Player.money
         towers.push(new Tower({
             position: {x: activeTile.position.x, y: activeTile.position.y}
         }))
@@ -241,14 +245,14 @@ canvas.addEventListener('mousemove', e=>{
     mouse.x = e.clientX - buffer.left
     mouse.y = e.clientY - buffer.top
     
-    activeTile = null
+    activeTile = undefined
     for (i = 0; i < buildTiles.length; i++){
         const tile = buildTiles[i]
         if (
             mouse.x > tile.position.x && mouse.x < tile.position.x + tile.width && mouse.y > tile.position.y && mouse.y < tile.position.y + tile.height
         ){
             activeTile = tile
-            break
+            break //stops refreshing if mouse is still
         }
     }
 })

@@ -74,7 +74,12 @@ class Enemy {
             x: this.position.x + this.width / 2,
             y: this.position.y + this.height / 2
         }
-    }
+        this.health = 100
+        this.speed = 1.5
+        this.velocity = {
+            x:0, y:0
+        }
+    } // end constructor
     
     spawn() {
         cvs.fillStyle = 'goldenrod'
@@ -83,6 +88,12 @@ class Enemy {
         cvs.beginPath()
         cvs.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2)
         cvs.fill()
+
+        cvs.fillStyle = 'red'
+        cvs.fillRect(this.position.x, this.position.y - 8, this.width, 5)
+
+        cvs.fillStyle = 'green'
+        cvs.fillRect(this.position.x, this.position.y - 8, this.width * this.health / 100, 5)
     }
 
     update() {
@@ -92,14 +103,17 @@ class Enemy {
         const yDistance = waypoint.y - this.center.y
         const xDistance = waypoint.x - this.center.x
         const angle = Math.atan2(yDistance, xDistance)
-        this.position.x += Math.cos(angle)
-        this.position.y += Math.sin(angle)
+
+        this.velocity.x = Math.cos(angle)
+        this.velocity.y = Math.sin(angle)
+        this.position.x += this.velocity.x * this.speed
+        this.position.y += this.velocity.y * this.speed
         this.center = {
             x: this.position.x + this.width / 2,
             y: this.position.y + this.height / 2
         }
         
-        if (Math.round(this.center.x) === Math.round(waypoint.x) && Math.round(this.center.y) === Math.round(waypoint.y) && this.waypointIndex < waypoints.length -1 ){
+        if (Math.abs(Math.round(this.center.x) - Math.round(waypoint.x)) < Math.abs(this.velocity.x * this.speed) && Math.abs(Math.round(this.center.y) - Math.round(waypoint.y)) < Math.abs(this.velocity.y * this.speed) && this.waypointIndex < waypoints.length -1 ){
             this.waypointIndex++
         }
     }
@@ -107,11 +121,29 @@ class Enemy {
 
 //-----END-----// Enemy class dimensions, center, and spawn / update functions, && Array
 
-function spawnWave(num) {
+function spawnWave(num, gap) {
     for (let i = 1; i <= num; i++) {
-        const gap = i * 60
-        enemies.push(new Enemy({ position: {x: waypoints[0].x - gap, y: waypoints[0].y} }))
+        waveGap = i * gap
+        enemies.push(new Enemy({ position: {x: waypoints[0].x - waveGap, y: waypoints[0].y} }))
     }
 }
 
-spawnWave(50)
+// function endlessMode() {
+//     let num = 10
+//     let gap = 100
+
+//     // while (player.health < 0){
+//         spawnWave(num, gap)
+        
+//         if (enemies.length === 0){
+//             num += 10
+//             gap -= 5
+//             spawnWave(num, gap)
+//         }
+//     }
+
+
+// endlessMode()
+
+
+spawnWave(30, 100)

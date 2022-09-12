@@ -14,8 +14,8 @@
             <div class="header">
                 <div class="input">
                     <form>
-                        <label><Enter for="gameName">Enter Name:</label>
-                            <input type="text" id="gameName" name="gameName" placeholder="Name"></input>
+                        <label><Enter for="gameName"></label>
+                            <input type="text" id="gameName" name="gameName" placeholder="Enter Name"></input>
                             <input type="button" id="nameButton" value="Submit" onclick="getNameInput()">
                     </form>
                 </div>
@@ -23,10 +23,21 @@
                     <div class="bannerContent">
                     </div>
                     <div class="gameInfo">
-                        test
+                        <div id="health" class="info">
+                            <h3>HEALTH</h3>
+                            <h5 id="healthNum">20</h5>
+                        </div>
+                        <div id="money" class="info">
+                            <h3>MONEY</h3>
+                            <h5 id="moneyNum">100</h5>
+                        </div>
+                        <div id="score" class="info">
+                            <h3>SCORE</h3>
+                            <h5 id="scoreNum">0</h5>
+                        </div>
                     </div>
                     <div class="picFrame">
-                        
+
                     </div>
                 </div>
             </div>
@@ -38,10 +49,12 @@
                     
                 </div>
             </div>
+            <!-- <div class="gameOverText">GAME OVER</div> -->
         </div>
 
         <script src="game.js"></script>
-        <script src="towerMaps.js"></script>
-        <script src="pathing.js"></script>
+        <script src="TowersAndTiles.js"></script>
+        <script src="EnemiesAndPathing.js"></script>
+        <script src="player.js"></script>
     </body>
 </html>
